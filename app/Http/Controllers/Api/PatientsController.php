@@ -10,16 +10,15 @@ use Illuminate\Http\JsonResponse;
 
 class PatientsController extends AbstractController
 {
-    private IServices $services;
 
     public function __construct(PatientsService $patientsService)
     {
-        $this->services = $patientsService;
+        $this->service = $patientsService;
     }
 
     public function index(): JsonResponse
     {
-        $patients = $this->services->all();
+        $patients = $this->service->all();
         return response()->json($patients, 200);
     }
 

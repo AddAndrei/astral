@@ -16,16 +16,16 @@ class PatientsFactory extends Factory
      */
     public function definition()
     {
-        $gender = $this->faker->boolean();
         $live  = $this->faker->boolean();
-        $fio = $this->faker->firstName('male'|'female') ." ". $this->faker->lastName('male'|'female');
         return [
             //
-            'id'        => $this->faker->uuid(),
-            'fio'       => $fio,
-            'gender'    => $gender,
-            'birth_date'=> $this->faker->dateTimeBetween('-30 years', '-10 years'),
-            'die_date'  => ($live) ? null : $this->faker->dateTimeBetween('-25 years', 'now'),
+            'uuid'          => $this->faker->uuid(),
+            'first_name'    => $this->faker->firstName('male'|'female'),
+            'second_name'   => $this->faker->firstName('male'|'female'),
+            'last_name'     => $this->faker->lastName(),
+            'gender'        => $this->faker->boolean(),
+            'birth_date'    => $this->faker->dateTimeBetween('-30 years', '-10 years'),
+            'die_date'      => ($live) ? null : $this->faker->dateTimeBetween('-25 years', 'now'),
         ];
     }
 }

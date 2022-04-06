@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('patients', function (Blueprint $table) {
+        Schema::create('medical_histories', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->string('first_name', 225);
-            $table->string('second_name', 255);
-            $table->string('last_Name', 255);
-            $table->boolean('gender')->default(true);
-            $table->date('birth_date');
-            $table->date('die_date')->nullable();
+            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+            $table->foreignId('diagnose_id')->constrained()->onDelete('cascade');
+            $table->date('open_date');
+            $table->date('close_date');
             $table->timestamps();
+
+
+
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists('medical_histories');
     }
 };

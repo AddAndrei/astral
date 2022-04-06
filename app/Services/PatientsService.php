@@ -6,7 +6,7 @@ use App\Interfaces\IServices;
 use App\Models\Patients;
 use Illuminate\Support\Collection;
 
-class PatientsService implements IServices
+class PatientsService extends Service implements IServices
 {
 
     public function all() : Collection
