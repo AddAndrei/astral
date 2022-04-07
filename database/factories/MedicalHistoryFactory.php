@@ -18,10 +18,11 @@ class MedicalHistoryFactory extends Factory
      */
     public function definition()
     {
+        $diagnose = $this->faker->boolean;
         return [
             //
             'patient_id'    => Patients::all()->random()->id, //только в рамках тестового задания
-            'diagnose_id'   => Diagnoses::all()->random()->id,
+            'diagnose_id'   => ($diagnose) ? Diagnoses::all()->random()->id : null,
             'open_date'     => $this->faker->dateTimeBetween('-24 months', 'now'),
             'close_date'    => $this->faker->dateTimeBetween('-24 months', 'now')
         ];

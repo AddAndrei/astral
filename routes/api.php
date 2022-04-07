@@ -20,5 +20,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/patients', [\App\Http\Controllers\Api\PatientsController::class, 'index']);
 Route::get('/diagnoses', [\App\Http\Controllers\Api\DiagnosesController::class, 'index']);
-Route::get('/history', [\App\Http\Controllers\Api\MedicalHistoryController::class, 'index']);
+Route::prefix('/history')->group(function (){
+
+    Route::get('', [\App\Http\Controllers\Api\MedicalHistoryController::class, 'index']);
+
+    Route::prefix('/illness')->group(function(){
+        Route::get('/{id}', [\App\Http\Controllers\Api\MedicalHistoryController::class, 'illness']);
+        Route::post('/delete', [\App\Http\Controllers\Api\MedicalHistoryController::class, 'delete']);//тут должен быть delete method
+        Route::put('/update', [\App\Http\Controllers\Api\MedicalHistoryController::class, 'edit']);
+    });
+
+    Route::post('/create', [\App\Http\Controllers\Api\MedicalHistoryController::class, 'create']);
+
+
+});
+
 

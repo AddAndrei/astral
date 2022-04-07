@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('medical_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('patient_id')->constrained()->onDelete('cascade');
-            $table->foreignId('diagnose_id')->constrained()->onDelete('cascade');
-            $table->date('open_date');
-            $table->date('close_date');
-            $table->timestamps();
+            $table->unsignedBigInteger('diagnose_id')->nullable();
 
+            $table->date('open_date');
+            $table->date('close_date')->nullable();
+            $table->timestamps();
+            $table->foreign('diagnose_id')->references('id')->on('diagnoses');
 
 
         });
